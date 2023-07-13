@@ -3,27 +3,21 @@ package main
 import "fmt"
 
 func main() {
-	var nums = []int{1,2,3}
+	var nums = []int{1, 2, 3}
 	k := removeDuplicates(nums)
 	fmt.Println(nums, k)
 }
 
 func removeDuplicates(nums []int) int {
-	var queue []int
-	last_int := nums[0]
-	unique := 1
-	for i := 1; i < len(nums); i++ {
-		if last_int == nums[i] {
-			queue = append(queue, i)
-		} else {
-			if len(queue) != 0 {
-				nums[queue[0]] = nums[i]
-				queue = queue[1:]
-				queue = append(queue, i)
-			}
-			last_int = nums[i]
-			unique++
+	if len(nums) == 1 {
+		return 1
+	}
+	i := 0
+	for j := 1; j < len(nums); j++ {
+		if nums[i] != nums[j] {
+			i++
+			nums[i] = nums[j]
 		}
 	}
-	return unique
+	return i + 1
 }
